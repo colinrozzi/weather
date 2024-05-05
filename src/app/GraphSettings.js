@@ -16,7 +16,7 @@ export default function GraphSettings({ graphSettings, setGraphSettings }) {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid black', flexWrap: 'wrap', width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', width: '100%' }}>
       {lines.map(({ metric, id, color }) => (
         <div key={id} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexGrow: 1 }}>
           <button

@@ -5,6 +5,10 @@ import styles from './weatherApp.module.css'
 import { useEffect, useState } from 'react'
 
 export default function WeatherPresentation({ day, locationString, timePeriod }) {
+
+  const [error, setError] = useState(null);
+  const [content, setContent] = useState(null);
+
   console.log('day in WeatherPresentation: ', day);
   const [graphSettings, setGraphSettings] = useState({
     lines: [
@@ -18,42 +22,56 @@ export default function WeatherPresentation({ day, locationString, timePeriod })
   const [weatherData, setWeatherData] = useState(null);
 
 
-  function makeWeatherRequestURL(location, date1) {
-    let url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
-    url = url + '/' + location;
-    url = url + '/' + date1;
-    url = url + '?key=VKC3G5F2AEAV3XV6TWPAGVZUW'
-    console.log(url);
-    return url;
-  }
 
-  function getData() {
-    const url = makeWeatherRequestURL(locationString, day);
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        setWeatherData(data);
-      });
+  async function getData() {
+    const response = await fetch('/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ locationString: locationString, day: day })
+    });
+
+    console.log('response: ', response)
+    console.log('status', response.status === 200)
+
+    if (response.status == 200) {
+      const data = await response.json();
+      console.log('setting data');
+      setWeatherData(data);
+    } else {
+      console.log('failed ')
+      setError('Failed to fetch data')
+    }
   }
 
   useEffect(() => {
-    getData();
-    console.log('getting new data');
-    console.log('location: ', locationString)
-    console.log('day: ', day)
+    try {
+      getData();
+    } catch (e) {
+      console.log('error')
+      console.log(e);
+      setError(e);
+    }
   }, [locationString, day]);
 
-  let content;
-
-  if (weatherData) {
-    content = (<div className={styles.weatherPresentation}>
-      <TextWeather weatherData={weatherData} />
-      <WeatherGraph weatherData={weatherData} timePeriod={timePeriod} graphSettings={graphSettings} />
-      <GraphSettings graphSettings={graphSettings} setGraphSettings={setGraphSettings} />
-    </div>)
-  } else {
-    content = <p>Loading...</p>
-  }
+  useEffect(() => {
+    console.log('testing')
+    if (weatherData) {
+      console.log('dfound weatherData')
+      setContent(<div className={styles.weatherPresentation}>
+        <TextWeather weatherData={weatherData} />
+        <WeatherGraph weatherData={weatherData} timePeriod={timePeriod} graphSettings={graphSettings} />
+        <GraphSettings graphSettings={graphSettings} setGraphSettings={setGraphSettings} />
+      </div>)
+    } else {
+      if (error) {
+        setContent(<div className={styles.weatherError}>{error}</div>)
+      } else {
+        setContent(<p>Loading...</p>)
+      }
+    }
+  }, [weatherData, error]);
 
   console.log(content);
 

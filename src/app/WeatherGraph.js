@@ -67,17 +67,6 @@ const LineGraph = ({ data, graphSettings, tickValues, yMin, yMax, timePeriod }) 
       ]}
   />
 )
-/*
-const oldAxis = (graphSettings.axisLeft ? graphSettings.axisLeft :
-  {
-    tickSize: 5,
-    tickPadding: 5,
-    tickRotation: 0,
-    legendOffset: -40,
-    legendPosition: 'middle',
-    truncateTickAt: 0
-  })
-  */
 
 function convertDatetime(dateString) {
   const parts = dateString.split(':');

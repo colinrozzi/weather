@@ -10,10 +10,10 @@ export default function Header() {
       </div>
       <div className={styles.menu}>
         <div className={styles.box}>
-          <a href='/help'>help</a>
+          <a href='/'>help</a>
         </div>
         <div className={styles.box}>
-          <a href='/sign-out'>sign out</a>
+          <a href='/'>sign out</a>
         </div>
       </div>
     </div>

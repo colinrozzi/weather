@@ -34,6 +34,12 @@
 .inputArea {
   display: flex;
   justify-content: flex-start;
+  border-bottom: 1px solid black;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  margin-bottom: 10px;
   z-index: 3;
 }
 
@@ -89,6 +95,9 @@
 }
 
 .locationInput input {
+  font-size: 1.17rem;
+  border: none;
+  height: 25px;
 }
 
 .locationInput svg {
@@ -127,6 +136,15 @@
   align-items: center;
 }
 
+.weatherError {
+  display: flex;
+  width: 100%;
+  margin-top: 20vh;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .textWeather {
   display: inline-block;
 }
@@ -161,6 +179,7 @@
 }
 
 .graphSettingsButton {
+  padding: 1rem;
   border: none;
   background-color: transparent;
 }
