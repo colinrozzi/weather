@@ -163,8 +163,6 @@
 .graphSettingsButton {
   border: none;
   background-color: transparent;
-  margin-left: 5px;
-  margin-right: 5px;
 }
 
 .graphSettingsButton:hover {

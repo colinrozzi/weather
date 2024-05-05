@@ -11,7 +11,7 @@ import styles from './weatherApp.module.css'
 const LineGraph = ({ data, graphSettings, tickValues, yMin, yMax, timePeriod }) => (
   <ResponsiveLine
     data={data}
-    margin={{ top: 0, right: 15, bottom: 100, left: 15 }}
+    margin={{ top: 10, right: 15, bottom: 100, left: 15 }}
     xScale={{
       type: 'point',
     }}
@@ -48,7 +48,7 @@ const LineGraph = ({ data, graphSettings, tickValues, yMin, yMax, timePeriod }) 
           translateY: 50,
           itemsSpacing: 0,
           itemDirection: 'left-to-right',
-          itemWidth: 80,
+          itemWidth: 75,
           itemHeight: 20,
           itemOpacity: 0.75,
           symbolSize: 5,

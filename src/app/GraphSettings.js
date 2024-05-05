@@ -8,17 +8,17 @@ export default function GraphSettings({ graphSettings, setGraphSettings }) {
   */
 
   const lines = [
-    { metric: 'temp', id: 'Temperature', color: 'hsl(0, 70%, 50%)' },
+    { metric: 'temp', id: 'Temp', color: 'hsl(0, 70%, 50%)' },
     { metric: 'humidity', id: 'Humidity', color: 'hsl(120, 70%, 50%)' },
     { metric: 'windspeed', id: 'Wind Speed', color: 'hsl(240, 70%, 50%)' },
     { metric: 'cloudcover', id: 'Cloud Cover', color: 'hsl(60, 70%, 50%)' },
-    { metric: 'precip', id: 'Precipitation', color: 'hsl(300, 70%, 50%)' }
+    { metric: 'precip', id: 'Precip', color: 'hsl(300, 70%, 50%)' }
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid black', flexWrap: 'wrap' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid black', flexWrap: 'wrap', width: '100%' }}>
       {lines.map(({ metric, id, color }) => (
-        <div key={id} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+        <div key={id} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexGrow: 1 }}>
           <button
             className={styles.graphSettingsButton}
             // if the line is already in the graph, remove it
