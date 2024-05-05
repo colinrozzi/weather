@@ -1,0 +1,146 @@
+.top {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  min-height: 20px;
+  color: black;
+}
+
+.box {
+}
+
+.logo {}
+
+.box {
+  margin: 2px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+}
+
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+}
+
+.inputArea {
+  height: 10vh;
+  width: 50vw;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.locationInput {
+    width: 100%;
+    height: 100%;
+}
+
+.timeInput {
+    width: 100%;
+    height: 100%;
+}
+
+.weatherDisplay {
+  display: flex;
+  flex-direction: row;
+}
+
+.weatherBox {
+  width: 500px;
+  height: 600px;
+}
+
+.locationInput {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.locationInput input {
+  border: none;
+}
+
+.locationInput svg {
+  width: 20px;
+}
+
+.timeInput {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.timeInput select {
+  border: none;
+  background-color: white;
+  width: auto;
+}
+
+.dayOfWeekInput {
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+}
+
+.dayOfWeekInput svg {
+  width: 20px;
+}
+
+.weatherPresentation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textWeather {
+  display: inline-block;
+}
+
+.dateElement {
+  justify-content: flex-start;
+  display: inline-block;
+}
+
+.weatherContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.weatherLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.weatherInfo {
+}
+
+.weatherInfo > * {
+}
+
+@media (max-width: 600px) {
+  .inputArea {
+    flex-direction: column;
+    height: 40vh;
+  }
+
+  .weatherDisplay {
+    flex-direction: column;
+  }
+}
