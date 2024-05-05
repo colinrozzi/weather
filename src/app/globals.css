@@ -1,5 +1,5 @@
 :root {
-  --background-color: white;
+  background-color: white;
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
@@ -42,7 +42,7 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background-color: white;
+    background-color: white;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
