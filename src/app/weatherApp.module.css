@@ -29,19 +29,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
 }
 
 .inputArea {
   display: flex;
   justify-content: flex-start;
-  border: 1px solid black;
   z-index: 3;
 }
 
 .locationInput {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .controlArea {
@@ -53,24 +51,34 @@
 }
 
 .controlArea button {
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  width: 5vw;
   height: 100vh;
   z-index: 2;
+}
+
+.controlArea button:hover {
+  background-color: lightgray;
+}
+
+.controlArea button svg {
+  height: 25px;
 }
 
 .weatherDisplay {
   display: flex;
   flex-direction: row;
   margin-top: 10px;
-  border: 1px solid black;
+  width: 90vw;
   z-index: 1;
 }
 
 .weatherBox {
-  width: 500px;
-  height: 600px;
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
+  width: 100%;
 }
 
 .locationInput {
@@ -141,6 +149,29 @@
   justify-content: center;
 }
 
+.weatherGraphContainer {
+  height: 60vh;
+  width: 90vw;
+}
+
+.weatherGraphBox {
+  height: 60vh;
+  width: 90vw;
+  position: absolute;
+}
+
+.graphSettingsButton {
+  border: none;
+  background-color: transparent;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.graphSettingsButton:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
 .weatherInfo {
 }
 
@@ -154,5 +185,18 @@
 
   .weatherDisplay {
     flex-direction: column;
+    width: calc(90vw - 20px);
+  }
+
+  .controlArea button {
+    width: 40px;
+  }
+
+  .weatherGraphContainer {
+    width: calc(90vw - 20px);
+  }
+
+  .weatherGraphBox {
+    width: calc(90vw - 20px);
   }
 }

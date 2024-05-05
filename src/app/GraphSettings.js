@@ -1,3 +1,5 @@
+import styles from './weatherApp.module.css';
+
 export default function GraphSettings({ graphSettings, setGraphSettings }) {
 
   /*
@@ -14,16 +16,17 @@ export default function GraphSettings({ graphSettings, setGraphSettings }) {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid black' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid black', flexWrap: 'wrap' }}>
       {lines.map(({ metric, id, color }) => (
         <div key={id} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <button
-            style={{
-              color: color
-            }}
+            className={styles.graphSettingsButton}
             // if the line is already in the graph, remove it
             onClick={e => {
               if (graphSettings.lines.some(line => line.id === id)) {
+                if (graphSettings.lines.length === 1) {
+                  return;
+                }
                 setGraphSettings({
                   lines: graphSettings.lines.filter(line => line.id !== id)
                 });
@@ -37,9 +40,10 @@ export default function GraphSettings({ graphSettings, setGraphSettings }) {
             {id}
           </button>
         </div>
-      ))}
+      ))
+      }
       { }
-    </div>
+    </div >
   );
 }
 
