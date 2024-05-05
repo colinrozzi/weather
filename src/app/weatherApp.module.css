@@ -113,8 +113,12 @@
 }
 
 .timeInput select {
+  appearance: none;
+  --webkit-appearance: none;
+  --moz-appearance: none;
+  --webkit-text-fill-color: black;
   border: none;
-  background-color: white;
+  background-color: transparent;
   width: auto;
 }
 
@@ -127,6 +131,7 @@
 }
 
 .dayOfWeekInput svg {
+  margin-right: 5px;
   height: 25px;
 }
 
