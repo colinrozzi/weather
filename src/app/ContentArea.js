@@ -4,50 +4,55 @@ import LocationInput from './LocationInput';
 import TimeInput from './TimeInput';
 import { useState, useEffect } from 'react';
 import WeatherPresentation from './WeatherPresentation';
+import Other from './Other';
 
 export default function ContentArea() {
 
   const [locationString, setLocationString] = useState('33 Main St, Boston, MA');
-  const [dayOfWeek, setDayOfWeek] = useState('Monday');
+  const [dayOfWeek, setDayOfWeek] = useState(0);
   const [timePeriod, setTimePeriod] = useState('5PM-9PM');
-  const [weatherData, setWeatherData] = useState(null);
+  const [curWeek, setCurWeek] = useState(0);
 
-  function makeWeatherRequestURL(location, date1) {
-    let url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
-    url = url + '/' + location;
-    url = url + '/' + date1;
-    url = url + '?key=VKC3G5F2AEAV3XV6TWPAGVZUW'
-    console.log(url);
-    return url;
-  }
+  let weeks = getWeeks(dayOfWeek);
 
-  function getData() {
-    const url = makeWeatherRequestURL(locationString, '2024-03-05');
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        setWeatherData(data);
-      });
-  }
-
-  async function getSampleData() {
-    const url = '/api';
-    const res = await fetch(url)
-    const data = await res.json();
-    console.log(data);
-    setWeatherData(data);
+  function getWeeks(dayOfWeek) {
+    let today = new Date();
+    let day = today.getDay();
+    let targetDate = today.getDate() + (dayOfWeek - day);
+    let weeks = [];
+    for (let i = 0; i < 3; i++) {
+      let date = new Date();
+      date.setDate(targetDate + 7 * i);
+      let month = date.getMonth() + 1;
+      let day = date.getDate();
+      let year = date.getFullYear();
+      let dateString = year + '-' + month + '-' + day;
+      weeks.push(dateString);
+    }
+    console.log(weeks)
+    return weeks;
   }
 
   useEffect(() => {
-    console.log('getting new data');
-    getSampleData();
-  }, [locationString, dayOfWeek]);
+    weeks = getWeeks(dayOfWeek);
+  }, [dayOfWeek]);
+
+  function backArrow() {
+    if (curWeek > 0) {
+      setCurWeek(curWeek - 1);
+    }
+  }
+
+  function frontArrow() {
+    if (curWeek < weeks.length - 1) {
+      setCurWeek(curWeek + 1);
+    }
+  }
 
   function printEverything() {
     console.log('locationString: ' + locationString);
     console.log('dayOfWeek: ' + dayOfWeek);
     console.log('timePeriod: ' + timePeriod);
-    console.log('weatherData: ' + weatherData);
   }
 
   return (
@@ -68,9 +73,17 @@ export default function ContentArea() {
           />
         </div>
       </div>
+      <div className={styles.controlArea}>
+        <div className={styles.backArrow}>
+          <button onClick={backArrow}>Back</button>
+        </div>
+        <div className={styles.frontArrow}>
+          <button onClick={frontArrow}>Front</button>
+        </div>
+      </div>
       <div className={styles.weatherDisplay}>
         <div className={styles.weatherBox}>
-          {weatherData && <WeatherPresentation weatherData={weatherData} timePeriod={timePeriod} />}
+          {weeks && <WeatherPresentation day={weeks[curWeek]} locationString={locationString} timePeriod={timePeriod} />}
         </div>
       </div>
     </div>

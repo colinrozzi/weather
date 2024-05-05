@@ -29,14 +29,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 80vh;
+  border: 1px solid black;
 }
 
 .inputArea {
-  height: 10vh;
-  width: 50vw;
   display: flex;
   justify-content: flex-start;
+  border: 1px solid black;
+  z-index: 3;
 }
 
 .locationInput {
@@ -44,19 +44,33 @@
     height: 100%;
 }
 
-.timeInput {
-    width: 100%;
-    height: 100%;
+.controlArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+}
+
+.controlArea button {
+  height: 100vh;
+  z-index: 2;
 }
 
 .weatherDisplay {
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
+  border: 1px solid black;
+  z-index: 1;
 }
 
 .weatherBox {
   width: 500px;
   height: 600px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
 }
 
 .locationInput {
@@ -67,11 +81,10 @@
 }
 
 .locationInput input {
-  border: none;
 }
 
 .locationInput svg {
-  width: 20px;
+  height: 25px;
 }
 
 .timeInput {
@@ -97,7 +110,7 @@
 }
 
 .dayOfWeekInput svg {
-  width: 20px;
+  height: 25px;
 }
 
 .weatherPresentation {
@@ -137,7 +150,6 @@
 @media (max-width: 600px) {
   .inputArea {
     flex-direction: column;
-    height: 40vh;
   }
 
   .weatherDisplay {

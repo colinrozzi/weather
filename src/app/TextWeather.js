@@ -3,6 +3,7 @@ import styles from './weatherApp.module.css';
 export default function TextWeather({ weatherData }) {
 
   function formatDate(date) {
+    date.setDate(date.getDate() + 1);
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const dayOfWeek = days[date.getDay()];
 
