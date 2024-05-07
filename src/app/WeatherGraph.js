@@ -2,6 +2,7 @@
 // yarn add @nivo/line
 import { ResponsiveLine } from '@nivo/line'
 import styles from './weatherApp.module.css'
+import { useEffect, useState } from 'react';
 
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -117,6 +118,8 @@ function convertTo24Hour(time) {
 }
 
 export default function WeatherGraph({ weatherData, timePeriod, graphSettings }) {
+  const [graph, setGraph] = useState(null);
+
   const graphPeriod = timePeriod.split('-');
   const startTime = convertTo24Hour(graphPeriod[0]);
   const endTime = convertTo24Hour(graphPeriod[1]);
@@ -127,12 +130,17 @@ export default function WeatherGraph({ weatherData, timePeriod, graphSettings })
   const tickModifier = Math.ceil((endTime - startTime) / 5);
   const tickValues = data[0].data.map((d, i) => { if (i % tickModifier === 0) return d.x; else return false; }).filter(x => x !== false);
 
+  // there is an error that it is somehow not updating on state changes anymore
+  useEffect(() => {
+    setGraph(<LineGraph graphSettings={graphSettings} data={data} tickValues={tickValues} yMin={0} yMax={100} timePeriod={graphPeriod} />);
+  }, [weatherData, timePeriod, graphSettings]);
+
   console.log(weatherData);
   console.log(data);
   return (
     <div className={styles.weatherGraphContainer}>
       <div className={styles.weatherGraphBox}>
-        <LineGraph graphSettings={graphSettings} data={data} tickValues={tickValues} yMin={0} yMax={100} timePeriod={graphPeriod} />
+        {graph ? graph : 'Loading...'}
       </div>
     </div>
   )

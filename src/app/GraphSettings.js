@@ -23,6 +23,7 @@ export default function GraphSettings({ graphSettings, setGraphSettings }) {
             className={styles.graphSettingsButton}
             // if the line is already in the graph, remove it
             onClick={e => {
+              console.log('button clicked')
               if (graphSettings.lines.some(line => line.id === id)) {
                 if (graphSettings.lines.length === 1) {
                   return;
