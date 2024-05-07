@@ -12,12 +12,12 @@ export default function ContentArea() {
   const [dayOfWeek, setDayOfWeek] = useState(0);
   const [timePeriod, setTimePeriod] = useState('5PM-9PM');
   const [curWeek, setCurWeek] = useState(0);
+  const [screenRatio, setScreenRatio] = useState(1);
 
   function getScreenRatio() {
     return Math.max(Math.floor(window.innerWidth / window.innerHeight), 1);
   }
 
-  const [screenRatio, setScreenRatio] = useState(getScreenRatio());
 
   useEffect(() => {
     const handleResize = () => {
