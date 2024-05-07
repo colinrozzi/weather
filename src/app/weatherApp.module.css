@@ -84,6 +84,7 @@
 .weatherBox {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -173,14 +174,9 @@
 }
 
 .weatherGraphContainer {
-  height: 60vh;
-  width: 90vw;
 }
 
 .weatherGraphBox {
-  height: 60vh;
-  width: 90vw;
-  position: absolute;
 }
 
 .graphSettingsButton {

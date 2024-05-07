@@ -13,6 +13,24 @@ export default function ContentArea() {
   const [timePeriod, setTimePeriod] = useState('5PM-9PM');
   const [curWeek, setCurWeek] = useState(0);
 
+  function getScreenRatio() {
+    return Math.max(Math.floor(window.innerWidth / window.innerHeight), 1);
+  }
+
+  const [screenRatio, setScreenRatio] = useState(getScreenRatio());
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenRatio(getScreenRatio());
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
   let weeks = getWeeks(dayOfWeek);
 
   function getWeeks(dayOfWeek) {
@@ -37,13 +55,17 @@ export default function ContentArea() {
   }, [dayOfWeek]);
 
   function backArrow() {
+    console.log('backArrow')
     if (curWeek > 0) {
+      console.log('moving back')
       setCurWeek(curWeek - 1);
     }
   }
 
   function frontArrow() {
-    if (curWeek < weeks.length - 1) {
+    console.log('frontArrow')
+    if (curWeek + (screenRatio - 1) < weeks.length - 1) {
+      console.log('moving forward')
       setCurWeek(curWeek + 1);
     }
   }
@@ -77,7 +99,15 @@ export default function ContentArea() {
       </div>
       <div className={styles.weatherDisplay}>
         <div className={styles.weatherBox}>
-          {weeks && <WeatherPresentation day={weeks[curWeek]} locationString={locationString} timePeriod={timePeriod} />}
+          {weeks ? (
+            Array.from({ length: screenRatio }, (_, i) => i).map((i) => {
+              return (
+                <WeatherPresentation key={i} locationString={locationString} day={weeks[curWeek + i]} timePeriod={timePeriod} screenRatio={screenRatio} />
+              )
+            })
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </div>
     </div>

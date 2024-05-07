@@ -23,15 +23,18 @@ export default function GraphSettings({ graphSettings, setGraphSettings }) {
             className={styles.graphSettingsButton}
             // if the line is already in the graph, remove it
             onClick={e => {
-              console.log('button clicked')
+              console.log('button ', id, ' clicked')
               if (graphSettings.lines.some(line => line.id === id)) {
                 if (graphSettings.lines.length === 1) {
+                  console.log('cannot remove last line')
                   return;
                 }
+                console.log('removing ', id, ' from graph')
                 setGraphSettings({
                   lines: graphSettings.lines.filter(line => line.id !== id)
                 });
               } else {
+                console.log('adding ', id, ' to graph')
                 setGraphSettings({
                   lines: [...graphSettings.lines, { metric, id, color }]
                 });

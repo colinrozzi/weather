@@ -117,8 +117,8 @@ function convertTo24Hour(time) {
   }
 }
 
-export default function WeatherGraph({ weatherData, timePeriod, graphSettings }) {
-  const [graph, setGraph] = useState(null);
+export default function WeatherGraph({ weatherData, timePeriod, graphSettings, screenRatio }) {
+  const [content, setContent] = useState(null);
 
   const graphPeriod = timePeriod.split('-');
   const startTime = convertTo24Hour(graphPeriod[0]);
@@ -132,16 +132,34 @@ export default function WeatherGraph({ weatherData, timePeriod, graphSettings })
 
   // there is an error that it is somehow not updating on state changes anymore
   useEffect(() => {
-    setGraph(<LineGraph graphSettings={graphSettings} data={data} tickValues={tickValues} yMin={0} yMax={100} timePeriod={graphPeriod} />);
-  }, [weatherData, timePeriod, graphSettings]);
+    const width = 90 / screenRatio;
+    console.log('screenRatio: ', screenRatio)
+    console.log('width: ', width)
+
+    const weatherGraphContainerStyle = {
+      height: '60vh',
+      width: width + 'vw'
+    }
+
+    const weatherGraphBoxStyle = {
+      height: '60vh',
+      width: width + 'vw',
+      position: 'absolute'
+    }
+
+    console.log('updating graph')
+    console.log('graphSettings; ', graphSettings)
+    setContent(
+      <div style={weatherGraphContainerStyle}>
+        <div style={weatherGraphBoxStyle}>
+          <LineGraph graphSettings={graphSettings} data={data} tickValues={tickValues} yMin={0} yMax={100} timePeriod={graphPeriod} />
+        </div>
+      </div>
+    );
+  }, [weatherData, timePeriod, graphSettings, screenRatio]);
 
   console.log(weatherData);
   console.log(data);
-  return (
-    <div className={styles.weatherGraphContainer}>
-      <div className={styles.weatherGraphBox}>
-        {graph ? graph : 'Loading...'}
-      </div>
-    </div>
-  )
+
+  return content;
 }

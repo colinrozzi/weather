@@ -10,6 +10,10 @@ function makeWeatherRequestURL(location, date1) {
 export async function POST(req, res) {
   const json = await req.json();
   const response = await fetch(makeWeatherRequestURL(json.locationString, json.day));
+  if (!response.ok) {
+    console.log(await response.text())
+    return new Response('Failed to fetch data', { status: 500 });
+  }
   const responseJson = await response.json();
   console.log(responseJson)
   return new Response(JSON.stringify(responseJson));

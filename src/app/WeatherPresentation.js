@@ -4,7 +4,7 @@ import GraphSettings from "./GraphSettings"
 import styles from './weatherApp.module.css'
 import { useEffect, useState } from 'react'
 
-export default function WeatherPresentation({ day, locationString, timePeriod }) {
+export default function WeatherPresentation({ day, locationString, timePeriod, screenRatio }) {
 
   const [error, setError] = useState(null);
   const [content, setContent] = useState(null);
@@ -13,10 +13,6 @@ export default function WeatherPresentation({ day, locationString, timePeriod })
   const [graphSettings, setGraphSettings] = useState({
     lines: [
       { metric: 'temp', id: 'Temp', color: 'hsl(0, 70%, 50%)' },
-      { metric: 'humidity', id: 'Humidity', color: 'hsl(120, 70%, 50%)' },
-      { metric: 'windspeed', id: 'Wind Speed', color: 'hsl(240, 70%, 50%)' },
-      { metric: 'cloudcover', id: 'Cloud Cover', color: 'hsl(60, 70%, 50%)' },
-      { metric: 'precip', id: 'Precip', color: 'hsl(300, 70%, 50%)' }
     ]
   });
   const [weatherData, setWeatherData] = useState(null);
@@ -56,12 +52,10 @@ export default function WeatherPresentation({ day, locationString, timePeriod })
   }, [locationString, day]);
 
   useEffect(() => {
-    console.log('testing')
     if (weatherData) {
-      console.log('dfound weatherData')
       setContent(<div className={styles.weatherPresentation}>
         <TextWeather weatherData={weatherData} />
-        <WeatherGraph weatherData={weatherData} timePeriod={timePeriod} graphSettings={graphSettings} />
+        <WeatherGraph weatherData={weatherData} timePeriod={timePeriod} graphSettings={graphSettings} screenRatio={screenRatio} />
         <GraphSettings graphSettings={graphSettings} setGraphSettings={setGraphSettings} />
       </div>)
     } else {
@@ -71,7 +65,7 @@ export default function WeatherPresentation({ day, locationString, timePeriod })
         setContent(<p>Loading...</p>)
       }
     }
-  }, [weatherData, error]);
+  }, [weatherData, graphSettings, error, screenRatio]);
 
   console.log(content);
 
