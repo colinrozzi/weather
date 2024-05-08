@@ -12,7 +12,7 @@ export default function GraphSettings({ graphSettings, setGraphSettings }) {
     { metric: 'humidity', id: 'Humidity', color: 'hsl(120, 70%, 50%)' },
     { metric: 'windspeed', id: 'Wind Speed', color: 'hsl(240, 70%, 50%)' },
     { metric: 'cloudcover', id: 'Cloud Cover', color: 'hsl(60, 70%, 50%)' },
-    { metric: 'precip', id: 'Precip', color: 'hsl(300, 70%, 50%)' }
+    { metric: 'precipprob', id: 'Precip Prob', color: 'hsl(300, 70%, 50%)' }
   ];
 
   return (
@@ -46,37 +46,6 @@ export default function GraphSettings({ graphSettings, setGraphSettings }) {
         </div>
       ))
       }
-      { }
     </div >
   );
-}
-
-function GraphCheckBoxes({ lines, graphSettings, setGraphSettings }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-      {lines.map(({ metric, id, color }) => (
-        <div key={id} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-          <input
-            type='checkbox'
-            checked={graphSettings.lines.some(line => line.id === id)}
-            onChange={e => {
-              if (e.target.checked) {
-                setGraphSettings({
-                  lines: [...graphSettings.lines, { metric, id, color }]
-                });
-              } else {
-                setGraphSettings({
-                  lines: graphSettings.lines.filter(line => line.id !== id)
-                });
-              }
-            }}
-          />
-          <label style={{ color: color }}>{id}</label>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function GraphButtons({ lines, graphSettings, setGraphSettings }) {
 }

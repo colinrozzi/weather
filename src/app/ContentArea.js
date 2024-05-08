@@ -2,7 +2,8 @@
 import styles from './weatherApp.module.css';
 import LocationInput from './LocationInput';
 import TimeInput from './TimeInput';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
+import { useRouter } from 'next/navigation';
 import WeatherPresentation from './WeatherPresentation';
 import { backArrowSVG, forwardArrowSVG } from './Icons.js';
 
@@ -15,9 +16,8 @@ export default function ContentArea() {
   const [screenRatio, setScreenRatio] = useState(1);
 
   function getScreenRatio() {
-    return Math.max(Math.floor(window.innerWidth / window.innerHeight), 1);
+    return Math.max(Math.floor(window.innerWidth / (window.innerHeight * 0.6)), 1);
   }
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,20 +33,29 @@ export default function ContentArea() {
 
   let weeks = getWeeks(dayOfWeek);
 
+  function getNextDayOfWeek(dayOfWeek) {
+    let today = new Date();
+    return today.setDate(today.getDate() + (7 + dayOfWeek - today.getDay() - 1) % 7 + 1);
+  }
+
   function getWeeks(dayOfWeek) {
     let today = new Date();
-    let targetDate = today.getDate() + (dayOfWeek - today.getDay());
+    let startDate;
+    if (Number(dayOfWeek) === today.getDay()) {
+      startDate = today;
+    } else {
+      startDate = new Date(getNextDayOfWeek(dayOfWeek));
+    }
     let weeks = [];
     for (let i = 0; i < 3; i++) {
       let date = new Date();
-      date.setDate(targetDate + 7 * i);
+      date.setDate(startDate.getDate() + 7 * i);
       let month = date.getMonth() + 1;
       let day = date.getDate();
       let year = date.getFullYear();
       let dateString = year + '-' + month + '-' + day;
       weeks.push(dateString);
     }
-    console.log(weeks)
     return weeks;
   }
 
@@ -69,7 +78,6 @@ export default function ContentArea() {
       setCurWeek(curWeek + 1);
     }
   }
-
 
   return (
     <div className={styles.contentArea}>
