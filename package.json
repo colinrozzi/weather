@@ -12,6 +12,7 @@
     "@ducanh2912/next-pwa": "^10.2.7",
     "@nivo/core": "^0.86.0",
     "@nivo/line": "^0.86.0",
+    "@vercel/postgres": "^0.8.0",
     "dotenv": "^16.4.5",
     "next": "14.2.3",
     "opencage-api-client": "^1.0.5",
